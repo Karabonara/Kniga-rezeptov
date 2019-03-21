@@ -1,0 +1,225 @@
+object Form1: TForm1
+  Left = 257
+  Height = 624
+  Top = 182
+  Width = 1022
+  Caption = 'Form1'
+  ClientHeight = 0
+  ClientWidth = 0
+  OnCreate = FormCreate
+  LCLVersion = '1.4.4.0'
+  object PageControl1: TPageControl
+    Left = 24
+    Height = 912
+    Top = 24
+    Width = 1256
+    ActivePage = TabSheet1
+    TabIndex = 0
+    TabOrder = 0
+    OnChange = PageControl1Change
+    object TabSheet1: TTabSheet
+      Caption = 'Рецепты'
+      ClientHeight = 884
+      ClientWidth = 1248
+      OnContextPopup = TabSheet1ContextPopup
+      object Memo2: TMemo
+        Left = 32
+        Height = 266
+        Top = 544
+        Width = 360
+        Lines.Strings = (
+          'Memo2'
+        )
+        TabOrder = 0
+      end
+      object Memo1: TMemo
+        Left = 32
+        Height = 355
+        Top = 80
+        Width = 367
+        Lines.Strings = (
+          'Memo1'
+        )
+        OnChange = Memo1Change
+        TabOrder = 1
+      end
+      object Image1: TImage
+        Left = 448
+        Height = 744
+        Top = 80
+        Width = 760
+        OnClick = Image1Click
+      end
+      object DBNavigator2: TDBNavigator
+        Left = 0
+        Height = 25
+        Top = 864
+        Width = 241
+        BevelOuter = bvNone
+        ChildSizing.EnlargeHorizontal = crsScaleChilds
+        ChildSizing.EnlargeVertical = crsScaleChilds
+        ChildSizing.ShrinkHorizontal = crsScaleChilds
+        ChildSizing.ShrinkVertical = crsScaleChilds
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 100
+        ClientHeight = 25
+        ClientWidth = 241
+        DataSource = DataSource1
+        Options = []
+        TabOrder = 2
+      end
+      object Button1: TButton
+        Left = 272
+        Height = 25
+        Top = 856
+        Width = 75
+        Caption = 'Conect'
+        OnClick = Button1Click
+        TabOrder = 3
+      end
+      object Label2: TLabel
+        Left = 32
+        Height = 40
+        Top = 24
+        Width = 584
+        AutoSize = False
+        Caption = 'Label2'
+        Font.Height = -27
+        ParentColor = False
+        ParentFont = False
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Список рецептов'
+      ClientHeight = 884
+      ClientWidth = 1248
+      object DBGrid1: TDBGrid
+        Left = 24
+        Height = 272
+        Top = 32
+        Width = 563
+        AutoFillColumns = True
+        Color = clWindow
+        Columns = <        
+          item
+            Title.Caption = 'ID'
+            Width = 106
+            FieldName = 'ID'
+          end        
+          item
+            Title.Caption = 'Название блюда'
+            Width = 106
+            FieldName = 'Название блюда'
+          end        
+          item
+            Title.Caption = 'Ингредиенты'
+            Width = 106
+            FieldName = 'Ингредиенты'
+          end        
+          item
+            Title.Caption = 'Рецепт приготовления'
+            Width = 106
+            FieldName = 'Рецепт приготовления'
+          end        
+          item
+            Title.Caption = 'Фото'
+            Width = 106
+            FieldName = 'Фото'
+          end>
+        DataSource = DataSource1
+        TabOrder = 0
+        OnSelectEditor = DBGrid1SelectEditor
+      end
+      object DBNavigator1: TDBNavigator
+        Left = 16
+        Height = 25
+        Top = 864
+        Width = 241
+        BevelOuter = bvNone
+        ChildSizing.EnlargeHorizontal = crsScaleChilds
+        ChildSizing.EnlargeVertical = crsScaleChilds
+        ChildSizing.ShrinkHorizontal = crsScaleChilds
+        ChildSizing.ShrinkVertical = crsScaleChilds
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 100
+        ClientHeight = 25
+        ClientWidth = 241
+        DataSource = DataSource1
+        Options = []
+        TabOrder = 1
+      end
+    end
+  end
+  object Label1: TLabel
+    Left = 64
+    Height = 15
+    Top = 64
+    Width = 34
+    Caption = 'Label1'
+    ParentColor = False
+  end
+  object SQLTransaction1: TSQLTransaction
+    Active = False
+    Database = MySQL50Connection1
+    left = 928
+    top = 56
+  end
+  object SQLQuery1: TSQLQuery
+    FieldDefs = <    
+      item
+        Name = 'ID'
+        DataType = ftAutoInc
+        Precision = -1
+        Size = 0
+      end    
+      item
+        Name = 'Название блюда'
+        DataType = ftString
+        Precision = -1
+        Size = 150
+      end    
+      item
+        Name = 'Ингредиенты'
+        DataType = ftMemo
+        Precision = -1
+        Size = 0
+      end    
+      item
+        Name = 'Рецепт приготовления'
+        DataType = ftMemo
+        Precision = -1
+        Size = 0
+      end    
+      item
+        Name = 'Фото'
+        DataType = ftMemo
+        Precision = -1
+        Size = 0
+      end>
+    Transaction = SQLTransaction1
+    SQL.Strings = (
+      'SELECT * FROM rezept'
+    )
+    Params = <>
+    left = 720
+    top = 56
+  end
+  object DataSource1: TDataSource
+    DataSet = SQLQuery1
+    left = 784
+    top = 56
+  end
+  object MySQL50Connection1: TMySQL50Connection
+    Connected = False
+    LoginPrompt = False
+    DatabaseName = 'rezept'
+    KeepConnection = False
+    Transaction = SQLTransaction1
+    UserName = 'root'
+    CharSet = 'utf8'
+    HostName = 'localhost'
+    LogEvents = []
+    left = 856
+    top = 56
+  end
+end
